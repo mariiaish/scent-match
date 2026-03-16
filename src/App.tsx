@@ -1,73 +1,53 @@
 import { usePerfumeStore } from './store/usePerfumeStore';
+import { Search } from './components/Search';
+import { PerfumeCard } from './components/PerfumeCard';
 
 function App() {
-  const { allPerfumes, myShelf, recommendations, addToShelf, calculateRecs, clearShelf } = usePerfumeStore();
-
-  const testAddAndRec = () => {
-    // 1. Берем первый попавшийся парфюм из базы для теста
-    const testPerfume = allPerfumes[8000];
-    if (testPerfume) {
-      console.log("Добавляем на полку:", testPerfume.Perfume);
-      addToShelf(testPerfume);
-
-      // 2. Сразу запускаем расчет рекомендаций
-      calculateRecs();
-    }
-  };
+  const { myShelf, recommendations, removeFromShelf } = usePerfumeStore();
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>ScentMatch Test 🧪</h1>
+    <div className="min-h-screen">
+      <header className="py-12 text-center border-b bg-white">
+        <h1 className="text-4xl font-serif mb-2 tracking-tight">ScentMatch <span className="text-perfume-gold">AI</span></h1>
+        <p className="text-gray-500 text-sm">Find your next signature scent based on your collection</p>
+      </header>
 
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-        <button onClick={testAddAndRec} style={buttonStyle}>
-          Добавить 1-й аромат и рассчитать
-        </button>
-        <button onClick={clearShelf} style={{ ...buttonStyle, backgroundColor: '#ff4444' }}>
-          Очистить полку
-        </button>
-      </div>
+      <main className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-        {/* Секция полки */}
-        <section>
-          <h2>Моя полка ({myShelf.length})</h2>
-          <ul>
-            {myShelf.map(p => (
-              <li key={p.id}>{p.Brand} - {p.Perfume}</li>
-            ))}
-          </ul>
-        </section>
+        <aside className="lg:col-span-4 space-y-10">
+          <div className="space-y-4">
+            <h2 className="text-xl font-medium">Add to collection</h2>
+            <Search />
+          </div>
 
-        {/* Секция рекомендаций */}
-        <section>
-          <h2>Рекомендации ({recommendations.length})</h2>
-          <p style={{ fontSize: '0.8rem', color: '#666' }}>
-            (Алгоритм: База=3 балла, Сердце=2, Топ=1)
-          </p>
-          <ul>
-            {recommendations.map(p => (
-              <li key={p.id}>
-                <strong>{p.Brand} - {p.Perfume}</strong>
-                <span style={{ color: 'green', marginLeft: '10px' }}>
-                  Score: {(p as any).score}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
+          <div className="space-y-4">
+            <h2 className="text-xl font-medium italic">Your Shelf ({myShelf.length})</h2>
+            <div className="grid gap-4">
+              {myShelf.map(p => (
+                <PerfumeCard key={p.id} perfume={p} onRemove={removeFromShelf} />
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <div className="lg:col-span-8">
+          <h2 className="text-2xl font-serif mb-8 border-l-4 border-perfume-gold pl-4">Recommended for You</h2>
+
+          {recommendations.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {recommendations.map(p => (
+                <PerfumeCard key={p.id} perfume={p} score={(p as any).score} />
+              ))}
+            </div>
+          ) : (
+            <div className="h-64 flex items-center justify-center border-2 border-dashed rounded-2xl text-gray-400">
+              Add perfumes to see recommendations
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }
-
-const buttonStyle = {
-  padding: '10px 20px',
-  cursor: 'pointer',
-  backgroundColor: '#007bff',
-  color: 'white',
-  border: 'none',
-  borderRadius: '5px'
-};
 
 export default App;

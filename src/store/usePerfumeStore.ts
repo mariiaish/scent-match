@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Perfume, PerfumeState } from './types';
+import { Perfume, PerfumeState } from '../types/types';
 import allPerfumesData from '../data/perfumes.json';
 
 export const usePerfumeStore = create<PerfumeState>((set, get) => ({
