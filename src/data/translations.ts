@@ -1,0 +1,26 @@
+export const translations = {
+  ru: {
+    title: 'ScentMatch AI',
+    subtitle: 'Найди свой идеальный аромат на основе коллекции',
+    searchPlaceholder: 'Поиск любимых духов...',
+    myShelf: 'Моя полка',
+    recommendations: 'Рекомендации',
+    emptyShelf: 'Добавьте духи, чтобы получить рекомендации',
+    loading: 'ИИ анализирует ваши предпочтения...',
+    remove: 'Удалить с полки',
+    add: 'Добавить в коллекцию',
+    placeholder: 'Найти свой любимый аромат...',
+  },
+  en: {
+    title: 'ScentMatch AI',
+    subtitle: 'Find your next signature scent based on your collection',
+    searchPlaceholder: 'Search for your favorites...',
+    myShelf: 'Your Shelf',
+    recommendations: 'Recommendations',
+    emptyShelf: 'Add perfumes to see recommendations',
+    loading: 'AI is analyzing your tastes...',
+    remove: 'Remove from shelf',
+    add: 'Add to collection',
+    placeholder: 'Find your favorite fragrance...',
+  },
+};

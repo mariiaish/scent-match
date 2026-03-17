@@ -1,3 +1,5 @@
+import { translations } from '../data/translations';
+import { usePerfumeStore } from '../store/usePerfumeStore';
 import { Perfume } from '../types/types';
 
 interface Props {
@@ -7,6 +9,9 @@ interface Props {
 }
 
 export const PerfumeCard = ({ perfume, score, onRemove }: Props) => {
+  const { lang } = usePerfumeStore();
+  const t = translations[lang];
+
   return (
     <div className="group relative rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
       {score && (
@@ -41,7 +46,7 @@ export const PerfumeCard = ({ perfume, score, onRemove }: Props) => {
           onClick={() => onRemove(perfume.id)}
           className="mt-6 w-full py-2 text-xs text-red-400 opacity-0 transition-opacity group-hover:opacity-100 hover:underline"
         >
-          Remove from shelf
+          {t.remove}
         </button>
       )}
     </div>

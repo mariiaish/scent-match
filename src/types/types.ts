@@ -1,3 +1,5 @@
+export type Language = 'ru' | 'en';
+
 export interface Perfume {
   id: number;
   url: string;
@@ -28,4 +30,7 @@ export interface PerfumeState {
   removeFromShelf: (id: number) => void;
   clearShelf: () => void;
   fetchAIRecs: () => void;
+
+  lang: Language;
+  setLanguage: (lang: Language) => void;
 }

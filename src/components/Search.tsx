@@ -1,12 +1,14 @@
 import { useState, useMemo } from 'react';
 import Fuse from 'fuse.js';
-import { Search as SearchIcon, Sparkles } from 'lucide-react'; // Иконки
+import { Search as SearchIcon, Sparkles } from 'lucide-react';
 import { usePerfumeStore } from '../store/usePerfumeStore';
 import { Perfume } from '../types/types';
+import { translations } from '../data/translations';
 
 export const Search = () => {
   const [query, setQuery] = useState('');
-  const { allPerfumes, addToShelf, fetchAIRecs } = usePerfumeStore();
+  const { allPerfumes, addToShelf, fetchAIRecs, lang } = usePerfumeStore();
+  const t = translations[lang];
 
   const fuse = useMemo(() => {
     return new Fuse(allPerfumes, {
@@ -31,7 +33,7 @@ export const Search = () => {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Find your favorite fragrance..."
+          placeholder={t.placeholder}
           className="w-full rounded-2xl border border-gray-100 bg-white py-4 pr-4 pl-12 text-gray-700 shadow-sm transition-all placeholder:text-gray-400 focus:border-amber-200 focus:ring-2 focus:ring-amber-100 focus:outline-none"
         />
       </div>

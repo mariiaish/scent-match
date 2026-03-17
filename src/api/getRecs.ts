@@ -1,6 +1,21 @@
 export const config = { runtime: 'edge' };
 
-export default async function getRecs(shelfString: string) {
+export default async function getRecs(shelfString: string, lang: string) {
+  const systemPrompt = `
+    You are a professional perfumer and fragrance critic. 
+    Your goal is to recommend 5 perfumes based on the user's collection.
+
+    RULES:
+    1. Language: All explanations in the 'reason' field MUST be in ${lang === 'ru' ? 'RUSSIAN' : 'ENGLISH'}.
+    2. Format: Return ONLY raw JSON. Do NOT use markdown code blocks (no \`\`\`json).
+    3. Data: 'brand' and 'name' must stay in their original Latin/English form for database matching.
+    4. JSON structure:
+    {
+      "recommendations": [
+        { "brand": "string", "name": "string", "reason": "string" }
+      ]
+    }`.trim();
+
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -12,9 +27,12 @@ export default async function getRecs(shelfString: string) {
       model: 'stepfun/step-3.5-flash:free',
       messages: [
         {
+          role: 'system',
+          content: systemPrompt,
+        },
+        {
           role: 'user',
-          content: `Ты парфюмерный эксперт. Основываясь на этих парфюмах ${shelfString}, порекомендуй 5 похожих. Верни ТОЛЬКО ответ в формате объекта JSON : { "recommendations": [ { "brand": "...", "name": "...", "reason": "..." } ] }`,
-          // "content": `You are a perfume expert. Based on these perfumes: ${shelfString}, recommend 5 similar ones. Return ONLY a JSON object: { "recommendations": [ { "brand": "...", "name": "...", "reason": "..." } ] }`
+          content: `My collection: ${shelfString}. Recommend 5 similar perfumes.`,
         },
       ],
       reasoning: { enabled: true },
@@ -29,10 +47,27 @@ export default async function getRecs(shelfString: string) {
 
   const result = await response.json();
 
-  console.log('Успешный ответ ИИ:', result);
+  console.log('Успешный ответ:', result);
 
   const aiContent = result.choices[0].message.content;
+
+  const rawContent = result.choices[0].message.content;
+
+  const cleanJson = rawContent
+    .replace(/```json/g, '')
+    .replace(/```/g, '')
+    .trim();
+
+  try {
+    const parsedData = JSON.parse(cleanJson);
+    console.log('Успешно:', parsedData);
+    // ... отрисовать данные в карточки
+  } catch (e) {
+    console.error('Ошибка парсинга после очистки:', e);
+    console.log('Сырой ответ от ИИ был:', rawContent);
+  }
+
   const parsed = JSON.parse(aiContent);
 
-  console.log('Наши рекомендации:', parsed.recommendations);
+  console.log('Рекомендации:', parsed.recommendations);
 }
