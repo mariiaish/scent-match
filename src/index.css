@@ -1,10 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 body {
   @apply bg-perfume-bg text-gray-900;
 }
 
 @theme {
-  --color-perfume-gold: #D4AF37;
-  --color-perfume-bg: #FDFCFB;
+  --color-perfume-gold: #d4af37;
+  --color-perfume-bg: #fdfcfb;
 }
