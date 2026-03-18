@@ -21,15 +21,15 @@ export const PerfumeCard = ({ perfume, score, onRemove }: Props) => {
       )}
 
       <div className="mb-4">
-        <h3 className="font-serif text-lg leading-tight font-semibold">{perfume.Perfume}</h3>
-        <p className="text-sm tracking-widest text-gray-500 uppercase">{perfume.Brand}</p>
+        <h3 className="font-serif text-lg leading-tight font-semibold">{perfume.perfume}</h3>
+        <p className="text-sm tracking-widest text-gray-500 uppercase">{perfume.brand}</p>
       </div>
 
       <div className="space-y-3">
         <div>
           <span className="text-[10px] font-bold text-gray-400 uppercase">Base Notes</span>
           <div className="mt-1 flex flex-wrap gap-1">
-            {perfume.Base.slice(0, 3).map((note) => (
+            {perfume.base.slice(0, 3).map((note) => (
               <span
                 key={note}
                 className="rounded-full border border-gray-100 bg-gray-50 px-2 py-0.5 text-xs"
@@ -39,6 +39,10 @@ export const PerfumeCard = ({ perfume, score, onRemove }: Props) => {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="mt-2 mb-4">
+        <p className="text-sm tracking-widest text-gray-500">{perfume.reason}</p>
       </div>
 
       {onRemove && (

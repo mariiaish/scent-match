@@ -8,11 +8,12 @@ export default async function getRecs(shelfString: string, lang: string) {
     RULES:
     1. Language: All explanations in the 'reason' field MUST be in ${lang === 'ru' ? 'RUSSIAN' : 'ENGLISH'}.
     2. Format: Return ONLY raw JSON. Do NOT use markdown code blocks (no \`\`\`json).
-    3. Data: 'brand' and 'name' must stay in their original Latin/English form for database matching.
+    3. Data: 'brand' and 'perfume' must stay in their original Latin/English form for database matching. Field 'perfume' means it's name.
+    'top' - top notes, 'middle' - middle notes, 'base' - base notes, all this fields must stay in English and in lowercase.
     4. JSON structure:
     {
       "recommendations": [
-        { "brand": "string", "name": "string", "reason": "string" }
+        { "id": "string", "brand": "string", "perfume": "string", "reason": "string", "top": "string[]", "middle": "string[]", "base": "string[]" }
       ]
     }`.trim();
 
@@ -47,10 +48,6 @@ export default async function getRecs(shelfString: string, lang: string) {
 
   const result = await response.json();
 
-  console.log('Успешный ответ:', result);
-
-  const aiContent = result.choices[0].message.content;
-
   const rawContent = result.choices[0].message.content;
 
   const cleanJson = rawContent
@@ -60,14 +57,8 @@ export default async function getRecs(shelfString: string, lang: string) {
 
   try {
     const parsedData = JSON.parse(cleanJson);
-    console.log('Успешно:', parsedData);
-    // ... отрисовать данные в карточки
+    return parsedData;
   } catch (e) {
     console.error('Ошибка парсинга после очистки:', e);
-    console.log('Сырой ответ от ИИ был:', rawContent);
   }
-
-  const parsed = JSON.parse(aiContent);
-
-  console.log('Рекомендации:', parsed.recommendations);
 }

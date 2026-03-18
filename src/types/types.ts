@@ -2,17 +2,13 @@ export type Language = 'ru' | 'en';
 
 export interface Perfume {
   id: number;
-  url: string;
-  Perfume: string;
-  Brand: string;
-  Country?: string;
-  Gender?: string;
-  'Rating Value'?: string;
-  'Rating Count'?: string;
-  Year?: string;
-  Top: string[];
-  Middle: string[];
-  Base: string[];
+  perfume: string;
+  brand: string;
+  year?: string;
+  top: string[];
+  middle: string[];
+  base: string[];
+  reason?: string;
   mainaccord1?: string[];
   mainaccord2?: string[];
   mainaccord3?: string[];

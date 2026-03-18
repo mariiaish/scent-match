@@ -18,11 +18,11 @@ try {
       headers.forEach((header, i) => {
         let val = values[i] ? values[i].replace(/^"|"$/g, '').trim() : '';
 
-        const isNoteOrAccord = ['Top', 'Middle', 'Base', 'mainaccord'].some((word) =>
+        const isNoteOrAccord = ['top', 'middle', 'base', 'mainaccord'].some((word) =>
           header.includes(word),
         );
 
-        const isTitleOrBrand = ['Perfume', 'Brand'].some((word) => header.includes(word));
+        const isTitleOrBrand = ['perfume', 'brand'].some((word) => header.includes(word));
 
         if (isNoteOrAccord) {
           obj[header] = val

@@ -31,10 +31,13 @@ export const usePerfumeStore = create<PerfumeState>()(
         if (myShelf.length === 0) return;
 
         set({ isLoading: true });
-        const shelfString = myShelf.map((p) => `${p.Brand} ${p.Perfume}`).join(', ');
+        const shelfString = myShelf.map((p) => `${p.brand} ${p.perfume}`).join(', ');
 
         try {
-          getRecs(shelfString, lang);
+          const res = await getRecs(shelfString, lang);
+
+          set({ recommendations: [...res.recommendations] });
+
           set({ isLoading: false });
         } catch (error) {
           console.error('Ошибка при получении рекомендаций:', error);
@@ -51,7 +54,7 @@ export const usePerfumeStore = create<PerfumeState>()(
     {
       name: 'scent-match-storage',
       partialize: (state) => ({
-        myShelf: state.myShelf,
+        // myShelf: state.myShelf,
         lang: state.lang,
       }),
     },

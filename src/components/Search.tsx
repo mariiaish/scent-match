@@ -12,7 +12,7 @@ export const Search = () => {
 
   const fuse = useMemo(() => {
     return new Fuse(allPerfumes, {
-      keys: ['Perfume', 'Brand'],
+      keys: ['perfume', 'brand'],
       threshold: 0.3,
     });
   }, [allPerfumes]);
@@ -48,9 +48,9 @@ export const Search = () => {
             >
               <div>
                 <div className="font-medium text-gray-900 group-hover:text-amber-700">
-                  {p.Perfume}
+                  {p.perfume}
                 </div>
-                <div className="text-xs tracking-wider text-gray-500 uppercase">{p.Brand}</div>
+                <div className="text-xs tracking-wider text-gray-500 uppercase">{p.brand}</div>
               </div>
               <Sparkles className="h-4 w-4 text-amber-200 opacity-0 transition-opacity group-hover:opacity-100" />
             </li>
