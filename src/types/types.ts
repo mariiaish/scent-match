@@ -1,3 +1,5 @@
+import { User } from '@supabase/supabase-js';
+
 export type Language = 'ru' | 'en';
 
 export interface Perfume {
@@ -9,11 +11,6 @@ export interface Perfume {
   middle: string[];
   base: string[];
   reason?: string;
-  mainaccord1?: string[];
-  mainaccord2?: string[];
-  mainaccord3?: string[];
-  mainaccord4?: string[];
-  mainaccord5?: string[];
 }
 
 export interface PerfumeState {
@@ -26,7 +23,17 @@ export interface PerfumeState {
   removeFromShelf: (id: number) => void;
   clearShelf: () => void;
   fetchAIRecs: () => void;
+  fetchPerfumes: () => void;
+  fetchUserShelf: () => void;
 
   lang: Language;
   setLanguage: (lang: Language) => void;
+
+  user: User | null;
+  authLoading: boolean;
+
+  setUser: (user: User | null) => void;
+  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
 }

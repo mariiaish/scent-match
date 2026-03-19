@@ -19,10 +19,10 @@ export const Search = () => {
 
   const results = query ? fuse.search(query, { limit: 8 }).map((r) => r.item) : [];
 
-  const handleSelect = (perfume: Perfume) => {
-    addToShelf(perfume);
-    fetchAIRecs();
+  const handleSelect = async (perfume: Perfume) => {
     setQuery('');
+    addToShelf(perfume);
+    await fetchAIRecs();
   };
 
   return (
