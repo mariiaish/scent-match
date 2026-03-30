@@ -27,7 +27,7 @@ export const PerfumeCard = ({ perfume, score, onRemove }: Props) => {
 
       <div className="space-y-3">
         <div>
-          <span className="text-[10px] font-bold text-gray-400 uppercase">Base Notes</span>
+          <span className="text-[10px] font-bold text-gray-400 uppercase">{t.baseNotes}</span>
           <div className="mt-1 flex flex-wrap gap-1">
             {perfume.base.slice(0, 3).map((note) => (
               <span

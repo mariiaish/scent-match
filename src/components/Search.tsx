@@ -5,6 +5,7 @@ import { usePerfumeStore } from '../store/usePerfumeStore';
 import { Perfume } from '../types/types';
 import { translations } from '../data/translations';
 
+// TODO: add ability to create new fragnansec into database
 export const Search = () => {
   const [query, setQuery] = useState('');
   const { allPerfumes, addToShelf, fetchAIRecs, lang } = usePerfumeStore();

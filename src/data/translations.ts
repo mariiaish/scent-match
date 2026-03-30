@@ -10,6 +10,9 @@ export const translations = {
     remove: 'Удалить с полки',
     add: 'Добавить в коллекцию',
     placeholder: 'Найти свой любимый аромат...',
+    baseNotes: 'Базовые ноты',
+    getRecsByShelf: 'Получить рекомендации на основании ваших ароматов',
+    signOut: 'Выйти',
   },
   en: {
     title: 'ScentMatch AI',
@@ -22,5 +25,8 @@ export const translations = {
     remove: 'Remove from shelf',
     add: 'Add to collection',
     placeholder: 'Find your favorite fragrance...',
+    baseNotes: 'Base Notes',
+    getRecsByShelf: 'Get recommendations by your fragrances',
+    signOut: 'Sign Out',
   },
 };

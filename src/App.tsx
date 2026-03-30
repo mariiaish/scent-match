@@ -18,6 +18,7 @@ function App() {
     user,
     setUser,
     signOut,
+    fetchAIRecs,
   } = usePerfumeStore();
 
   const [isReady, setIsReady] = React.useState(false);
@@ -51,6 +52,10 @@ function App() {
     setIsReady(true);
   }, []);
 
+  const getRecsByShelf = async () => {
+    await fetchAIRecs();
+  };
+
   if (!isReady) {
     return <div className="bg-perfume-bg min-h-screen" />;
   }
@@ -64,7 +69,7 @@ function App() {
             onClick={() => signOut()}
             className="text-xs tracking-widest text-gray-400 uppercase transition-colors hover:text-red-500"
           >
-            {user.email} (Sign Out)
+            {user.email} (t.signOut)
           </button>
         )}
       </div>
@@ -118,8 +123,16 @@ function App() {
               ))}
             </div>
           ) : (
-            <div className="flex h-64 items-center justify-center rounded-2xl border-2 border-dashed text-gray-400">
+            <div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed text-gray-400">
               {t.emptyShelf}
+
+              {/* TODO: fix button style and text for recs if your shelf is not empty */}
+              <button
+                onClick={getRecsByShelf}
+                className="mt-4 w-full rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow transition-colors hover:bg-blue-700 hover:text-black"
+              >
+                {t.getRecsByShelf}
+              </button>
             </div>
           )}
         </div>
