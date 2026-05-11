@@ -112,8 +112,17 @@ function App() {
         </aside>
 
         <div className="lg:col-span-8">
-          <h2 className="border-perfume-gold mb-8 border-l-4 pl-4 font-serif text-2xl">
+          <h2 className="border-perfume-gold mb-8 flex flex-col border-l-4 pl-4 font-serif text-2xl">
             {t.recommendations}
+
+            {!!myShelf.length && (
+              <button
+                onClick={getRecsByShelf}
+                className="bg-perfume-gold hover:bg-perfume-dark-gold mt-4 max-w-max rounded px-4 py-2 text-lg font-semibold text-white shadow transition-colors hover:cursor-pointer"
+              >
+                {t.getRecsByShelf}
+              </button>
+            )}
           </h2>
 
           {recommendations.length > 0 ? (
@@ -125,14 +134,6 @@ function App() {
           ) : (
             <div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed text-gray-400">
               {t.emptyShelf}
-
-              {/* TODO: fix button style and text for recs if your shelf is not empty */}
-              <button
-                onClick={getRecsByShelf}
-                className="mt-4 w-full rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow transition-colors hover:bg-blue-700 hover:text-black"
-              >
-                {t.getRecsByShelf}
-              </button>
             </div>
           )}
         </div>

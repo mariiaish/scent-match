@@ -73,6 +73,7 @@ export const usePerfumeStore = create<PerfumeState>()(
 
       fetchAIRecs: async () => {
         const { myShelf, lang } = get();
+        console.log(myShelf.length);
         if (myShelf.length === 0) return;
 
         set({ isLoading: true });
@@ -89,6 +90,7 @@ export const usePerfumeStore = create<PerfumeState>()(
           set({ isLoading: false });
         }
       },
+
       setUser: (user) => set({ user }),
 
       signUp: async (email, password) => {

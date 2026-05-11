@@ -5,7 +5,7 @@ export const translations = {
     searchPlaceholder: 'Поиск любимых духов...',
     myShelf: 'Моя полка',
     recommendations: 'Рекомендации',
-    emptyShelf: 'Добавьте духи, чтобы получить рекомендации',
+    emptyShelf: '✨ Здесь будут ваши рекомендации ✨',
     loading: 'ИИ анализирует ваши предпочтения...',
     remove: 'Удалить с полки',
     add: 'Добавить в коллекцию',
