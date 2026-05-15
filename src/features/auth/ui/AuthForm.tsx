@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuthStore } from '../model/authSlice';
+import { Button } from '@/shared/ui/elements/button';
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -42,16 +43,16 @@ export const AuthForm = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-xl bg-gray-50 p-3 ring-amber-200 transition-all outline-none focus:ring-1"
         />
-        <button className="w-full rounded-xl bg-black py-3 font-medium text-white transition-all hover:bg-gray-800">
+        <Button className="w-full rounded-xl bg-black py-3 font-medium text-white transition-all hover:bg-gray-800">
           {isLogin ? 'Sign In' : 'Join ScentMatch'}
-        </button>
+        </Button>
       </form>
-      <button
+      <Button
         onClick={() => setIsLogin(!isLogin)}
         className="mt-4 w-full text-sm text-gray-400 transition-colors hover:text-black"
       >
         {isLogin ? "Don't have an account? Sign Up" : 'Already a member? Log In'}
-      </button>
+      </Button>
     </div>
   );
 };

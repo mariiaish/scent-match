@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { User } from '@supabase/supabase-js';
-import { Language } from '../../../shared/types/types';
+import { Language } from '@/shared/types/types';
 
 interface UserState {
   user: User | null;

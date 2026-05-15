@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { signIn, signOut, signUp } from '../api/authApi';
+import { signIn, signUp, signOut } from '../api/authApi';
 
 interface AuthState {
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;

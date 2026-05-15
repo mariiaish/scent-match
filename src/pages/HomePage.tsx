@@ -1,13 +1,14 @@
 import React from 'react';
-import { usePerfumeStore } from '../entities/perfume/model/perfumeSlice';
-import { useUserStore } from '../entities/user/model/userSlice';
-import { translations } from '../shared/i18n/translations';
-import { supabase } from '../shared/lib/supabase';
-import { LanguageSwitcher } from '../shared/ui/LanguageSwitcher';
-import { PerfumeCard } from '../entities/perfume/ui/PerfumeCard';
-import { AuthForm } from '../features/auth/ui/AuthForm';
-import { RecommendationsList } from '../features/recommendations/ui/RecommendationsList';
-import { Search } from '../features/search/ui/Search';
+import { usePerfumeStore } from '@/entities/perfume/model/perfumeSlice';
+import { PerfumeCard } from '@/entities/perfume/ui/PerfumeCard';
+import { useUserStore } from '@/entities/user/model/userSlice';
+import { AuthForm } from '@/features/auth/ui/AuthForm';
+import { RecommendationsList } from '@/features/recommendations/ui/RecommendationsList';
+import { Search } from '@/features/search/ui/Search';
+import { translations } from '@/shared/i18n/translations';
+import { supabase } from '@/shared/lib/supabase';
+import { LanguageSwitcher } from '@/shared/ui/LanguageSwitcher';
+import { Button } from '@/shared/ui/elements/button';
 
 export const HomePage = () => {
   const { myShelf, removeFromShelf, fetchPerfumes, fetchUserShelf } = usePerfumeStore();
@@ -54,12 +55,12 @@ export const HomePage = () => {
       <div className="mx-auto flex max-w-7xl justify-between px-6 pt-4">
         <LanguageSwitcher />
         {user && (
-          <button
+          <Button
             onClick={() => signOut()}
             className="text-xs tracking-widest text-gray-400 uppercase transition-colors hover:text-red-500"
           >
             {user.email} (t.signOut)
-          </button>
+          </Button>
         )}
       </div>
 

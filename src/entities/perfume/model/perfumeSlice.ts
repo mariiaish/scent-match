@@ -1,3 +1,4 @@
+import { Perfume } from '@/shared/types/types';
 import { create } from 'zustand';
 import {
   fetchAllPerfumes,
@@ -5,7 +6,6 @@ import {
   addToShelfApi,
   removeFromShelfApi,
 } from '../api/perfumeApi';
-import { Perfume } from '../../../shared/types/types';
 
 interface PerfumeState {
   allPerfumes: Perfume[];

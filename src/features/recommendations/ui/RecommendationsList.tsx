@@ -1,9 +1,10 @@
+import { usePerfumeStore } from '@/entities/perfume/model/perfumeSlice';
+import { PerfumeCard } from '@/entities/perfume/ui/PerfumeCard';
+import { useUserStore } from '@/entities/user/model/userSlice';
+import { translations } from '@/shared/i18n/translations';
 import React from 'react';
 import { useRecsStore } from '../model/recsSlice';
-import { usePerfumeStore } from '../../../entities/perfume/model/perfumeSlice';
-import { useUserStore } from '../../../entities/user/model/userSlice';
-import { translations } from '../../../shared/i18n/translations';
-import { PerfumeCard } from '../../../entities/perfume/ui/PerfumeCard';
+import { Button } from '@/shared/ui/elements/button';
 
 export const RecommendationsList = () => {
   const { myShelf } = usePerfumeStore();
@@ -31,12 +32,12 @@ export const RecommendationsList = () => {
         {t.recommendations}
 
         {!!myShelf.length && (
-          <button
+          <Button
             onClick={getRecsByShelf}
             className="bg-perfume-gold hover:bg-perfume-dark-gold mt-4 max-w-max rounded px-4 py-2 text-lg font-semibold text-white shadow transition-colors hover:cursor-pointer"
           >
             {t.getRecsByShelf}
-          </button>
+          </Button>
         )}
       </h2>
 
