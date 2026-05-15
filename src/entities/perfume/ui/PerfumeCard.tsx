@@ -1,15 +1,14 @@
-import { translations } from '../data/translations';
-import { usePerfumeStore } from '../store/usePerfumeStore';
-import { Perfume } from '../types/types';
+import { translations } from '../../../shared/i18n/translations';
+import { Language, Perfume } from '../../../shared/types/types';
 
 interface Props {
   perfume: Perfume;
   score?: number;
   onRemove?: (id: number) => void;
+  lang: Language;
 }
 
-export const PerfumeCard = ({ perfume, score, onRemove }: Props) => {
-  const { lang } = usePerfumeStore();
+export const PerfumeCard = ({ perfume, score, onRemove, lang }: Props) => {
   const t = translations[lang];
 
   return (

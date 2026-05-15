@@ -1,14 +1,18 @@
 import { useState, useMemo } from 'react';
 import Fuse from 'fuse.js';
 import { Search as SearchIcon, Sparkles } from 'lucide-react';
-import { usePerfumeStore } from '../store/usePerfumeStore';
-import { Perfume } from '../types/types';
-import { translations } from '../data/translations';
+import { usePerfumeStore } from '../../../entities/perfume/model/perfumeSlice';
+import { useRecsStore } from '../../recommendations/model/recsSlice';
+import { useUserStore } from '../../../entities/user/model/userSlice';
+import { translations } from '../../../shared/i18n/translations';
+import { Perfume } from '../../../shared/types/types';
 
-// TODO: add ability to create new fragnansec into database
+// TODO: add ability to create new fragrances into database
 export const Search = () => {
   const [query, setQuery] = useState('');
-  const { allPerfumes, addToShelf, fetchAIRecs, lang } = usePerfumeStore();
+  const { allPerfumes, addToShelf, myShelf } = usePerfumeStore();
+  const { fetchAIRecs } = useRecsStore();
+  const { lang, user } = useUserStore();
   const t = translations[lang];
 
   const fuse = useMemo(() => {
@@ -22,8 +26,9 @@ export const Search = () => {
 
   const handleSelect = async (perfume: Perfume) => {
     setQuery('');
-    addToShelf(perfume);
-    await fetchAIRecs();
+    const userId = user?.id;
+    await addToShelf(perfume, userId);
+    await fetchAIRecs(myShelf, lang);
   };
 
   return (

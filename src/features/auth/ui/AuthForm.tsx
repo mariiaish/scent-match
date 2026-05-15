@@ -1,17 +1,22 @@
 import { useState } from 'react';
-import { usePerfumeStore } from '../store/usePerfumeStore';
+import { useAuthStore } from '../model/authSlice';
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, signUp } = usePerfumeStore();
+  const { signIn, signUp } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (isLogin) await signIn(email, password);
-      else await signUp(email, password);
+      if (isLogin) {
+        const { error } = await signIn(email, password);
+        if (error) throw error;
+      } else {
+        const { error } = await signUp(email, password);
+        if (error) throw error;
+      }
     } catch (err: any) {
       alert(err.message);
     }

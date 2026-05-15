@@ -1,7 +1,7 @@
-import { usePerfumeStore } from '../store/usePerfumeStore';
+import { useUserStore } from '../../entities/user/model/userSlice';
 
 export const LanguageSwitcher = () => {
-  const { lang, setLanguage } = usePerfumeStore();
+  const { lang, setLanguage } = useUserStore();
 
   return (
     <div className="absolute top-5 right-5 flex gap-2 text-xs font-bold">
