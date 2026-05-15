@@ -9,7 +9,6 @@ import { translations } from '@/shared/i18n/translations';
 import { supabase } from '@/shared/lib/supabase';
 import { LanguageSwitcher } from '@/shared/ui/LanguageSwitcher';
 import { Button } from '@/shared/ui/elements/button';
-
 export const HomePage = () => {
   const { myShelf, removeFromShelf, fetchPerfumes, fetchUserShelf } = usePerfumeStore();
   const { lang, user, setUser, signOut } = useUserStore();
@@ -56,7 +55,7 @@ export const HomePage = () => {
         <LanguageSwitcher />
         {user && (
           <Button
-            onClick={() => signOut()}
+            onClick={signOut}
             className="text-xs tracking-widest text-gray-400 uppercase transition-colors hover:text-red-500"
           >
             {user.email} (t.signOut)

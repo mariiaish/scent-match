@@ -43,7 +43,10 @@ export const AuthForm = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-xl bg-gray-50 p-3 ring-amber-200 transition-all outline-none focus:ring-1"
         />
-        <Button className="w-full rounded-xl bg-black py-3 font-medium text-white transition-all hover:bg-gray-800">
+        <Button
+          type="submit"
+          className="w-full rounded-xl bg-black py-3 font-medium text-white transition-all hover:bg-gray-800"
+        >
           {isLogin ? 'Sign In' : 'Join ScentMatch'}
         </Button>
       </form>
