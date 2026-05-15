@@ -27,8 +27,13 @@ export const Search = () => {
   const handleSelect = async (perfume: Perfume) => {
     setQuery('');
     const userId = user?.id;
+    // Сначала добавляем в полку
     await addToShelf(perfume, userId);
-    await fetchAIRecs(myShelf, lang);
+    // Затем обновляем рекомендации с УЖЕ обновлённой полкой
+    // myShelf ещё не содержит добавленный парфюм (zustand асинхронный),
+    // поэтому создаём новую полку вручную
+    const updatedShelf = [...myShelf, perfume];
+    await fetchAIRecs(updatedShelf, lang);
   };
 
   return (
@@ -46,7 +51,7 @@ export const Search = () => {
 
       {results.length > 0 && (
         <ul className="animate-in fade-in slide-in-from-top-2 absolute top-full right-0 left-0 z-50 mt-2 overflow-hidden rounded-2xl border border-white/20 bg-white/80 shadow-2xl backdrop-blur-xl duration-200">
-          {results.map((p) => (
+          {results.map((p: Perfume) => (
             <li
               key={p.id}
               onClick={() => handleSelect(p)}

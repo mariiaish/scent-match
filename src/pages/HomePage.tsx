@@ -4,10 +4,10 @@ import { useUserStore } from '../entities/user/model/userSlice';
 import { translations } from '../shared/i18n/translations';
 import { supabase } from '../shared/lib/supabase';
 import { LanguageSwitcher } from '../shared/ui/LanguageSwitcher';
-import { Search } from 'lucide-react';
 import { PerfumeCard } from '../entities/perfume/ui/PerfumeCard';
 import { AuthForm } from '../features/auth/ui/AuthForm';
 import { RecommendationsList } from '../features/recommendations/ui/RecommendationsList';
+import { Search } from '../features/search/ui/Search';
 
 export const HomePage = () => {
   const { myShelf, removeFromShelf, fetchPerfumes, fetchUserShelf } = usePerfumeStore();

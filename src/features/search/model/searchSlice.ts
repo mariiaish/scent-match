@@ -1,1 +1,0 @@
-// slice с query, results

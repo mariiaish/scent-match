@@ -64,7 +64,7 @@ export default async function handler(req: Request) {
           },
           {
             role: 'user',
-            content: `My collection: ${shelfString}. Recommend 5 similar perfumes.`,
+            content: `${shelfString}`,
           },
         ],
 
