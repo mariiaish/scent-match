@@ -49,7 +49,7 @@ export const RecommendationsList = () => {
         </div>
       ) : (
         <div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed text-gray-400">
-          {t.emptyShelf}
+          {t.emptyRecs}
         </div>
       )}
     </div>

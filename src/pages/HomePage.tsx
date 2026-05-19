@@ -1,18 +1,18 @@
 import React from 'react';
 import { usePerfumeStore } from '@/entities/perfume/model/perfumeSlice';
-import { PerfumeCard } from '@/entities/perfume/ui/PerfumeCard';
 import { useUserStore } from '@/entities/user/model/userSlice';
-import { AuthForm } from '@/features/auth/ui/AuthForm';
 import { RecommendationsList } from '@/features/recommendations/ui/RecommendationsList';
 import { Search } from '@/features/search/ui/Search';
 import { translations } from '@/shared/i18n/translations';
 import { supabase } from '@/shared/lib/supabase';
 import { LanguageSwitcher } from '@/shared/ui/LanguageSwitcher';
 import { Button } from '@/shared/ui/elements/button';
+import { UserShelf } from '@/entities/user/ui/UserShelf';
+import { AuthForm } from '@/features/auth/ui/AuthForm';
+
 export const HomePage = () => {
-  const { myShelf, removeFromShelf, fetchPerfumes, fetchUserShelf } = usePerfumeStore();
+  const { fetchPerfumes, fetchUserShelf } = usePerfumeStore();
   const { lang, user, setUser, signOut } = useUserStore();
-  const userId = user?.id;
 
   const [isReady, setIsReady] = React.useState(false);
   const t = translations[lang];
@@ -51,15 +51,17 @@ export const HomePage = () => {
 
   return (
     <div className="bg-perfume-bg min-h-screen">
-      <div className="mx-auto flex max-w-7xl justify-between px-6 pt-4">
+      <div className="mx-auto flex max-w-7xl flex-row justify-between px-6 pt-4">
         <LanguageSwitcher />
-        {user && (
+        {user ? (
           <Button
             onClick={signOut}
             className="text-xs tracking-widest text-gray-400 uppercase transition-colors hover:text-red-500"
           >
             {user.email} (t.signOut)
           </Button>
+        ) : (
+          <AuthForm />
         )}
       </div>
 
@@ -76,33 +78,8 @@ export const HomePage = () => {
             <h2 className="text-xl font-medium">{t.searchPlaceholder}</h2>
             <Search />
           </div>
-
-          <div className="space-y-4">
-            <h2 className="text-xl font-medium italic">
-              {t.myShelf} ({myShelf.length})
-            </h2>
-
-            <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
-              <div className="grid gap-4">
-                {myShelf.map((p) => (
-                  <PerfumeCard
-                    key={p.id}
-                    perfume={p}
-                    onRemove={(id) => removeFromShelf(id, userId)}
-                    lang={lang}
-                  />
-                ))}
-                {!user && (
-                  <>
-                    <p className="mb-4 text-center text-sm text-gray-500 italic">
-                      Sign in to save your collection
-                    </p>
-                    <AuthForm />
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
+          {/* {!user && <AuthForm />} */}
+          <UserShelf />
         </aside>
 
         <RecommendationsList />
