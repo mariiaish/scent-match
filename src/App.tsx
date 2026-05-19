@@ -5,6 +5,4 @@ export default function App() {
 }
 
 // TODO:
-// - add loader while getting recs
-// - move auth form from user shelf
 // - save perfumes when unautozized user is autorized. add them to user shelf
