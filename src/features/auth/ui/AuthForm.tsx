@@ -33,50 +33,50 @@ export const AuthForm = () => {
 
   return (
     <Dialog>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <DialogTrigger>
-          <Button variant="outline">Log in</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-sm">
-          <DialogHeader>
-            <DialogDescription>
-              <p className="mb-4 text-center text-sm text-gray-500 italic">
-                Sign in to save your collection
-              </p>
-            </DialogDescription>
-          </DialogHeader>
-          <>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl bg-gray-50 p-3 ring-amber-200 transition-all outline-none focus:ring-1"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl bg-gray-50 p-3 ring-amber-200 transition-all outline-none focus:ring-1"
-            />
-          </>
+      <DialogTrigger>
+        <Button variant="outline">{isLogin ? 'Log in' : 'Sign Up'}</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-sm">
+        <DialogHeader>
+          <DialogDescription>
+            <p className="mb-4 text-center text-sm text-gray-500 italic">
+              {isLogin
+                ? 'Sign in to save your collection'
+                : 'Create an account to save your collection'}
+            </p>
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full rounded-xl bg-gray-50 p-3 ring-amber-200 transition-all outline-none focus:ring-1"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full rounded-xl bg-gray-50 p-3 ring-amber-200 transition-all outline-none focus:ring-1"
+          />
           <DialogFooter className="flex flex-col">
             <Button
               type="submit"
               className="w-full bg-black py-3 font-medium text-white transition-all hover:bg-gray-800"
             >
-              Sign In
+              {isLogin ? 'Sign In' : 'Sign Up'}
             </Button>
             <Button
               onClick={() => setIsLogin(!isLogin)}
               className="w-full text-sm text-gray-400 transition-colors hover:text-black"
             >
-              Don't have an account? Sign Up
+              {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'}
             </Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 };
