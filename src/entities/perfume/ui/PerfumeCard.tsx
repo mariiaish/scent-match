@@ -1,5 +1,6 @@
-import { translations } from '../../../shared/i18n/translations';
-import { Language, Perfume } from '../../../shared/types/types';
+import { translations } from '@/shared/i18n/translations';
+import { Perfume, Language } from '@/shared/types/types';
+import { Button } from '@/shared/ui/elements/button';
 
 interface Props {
   perfume: Perfume;
@@ -45,12 +46,11 @@ export const PerfumeCard = ({ perfume, score, onRemove, lang }: Props) => {
       </div>
 
       {onRemove && (
-        <button
-          onClick={() => onRemove(perfume.id)}
-          className="mt-6 w-full py-2 text-xs text-red-400 opacity-0 transition-opacity group-hover:opacity-100 hover:underline"
-        >
-          {t.remove}
-        </button>
+        <>
+          <Button variant="danger" onClick={() => onRemove(perfume.id)}>
+            {t.remove}
+          </Button>
+        </>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
+import { Perfume } from '@/shared/types/types';
 import { create } from 'zustand';
 import getRecs from '../api/getRecs';
-import { Perfume } from '../../../shared/types/types';
 
 interface RecsState {
   recommendations: Perfume[];

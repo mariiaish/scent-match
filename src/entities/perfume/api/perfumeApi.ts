@@ -1,5 +1,5 @@
-import { supabase } from '../../../shared/lib/supabase';
-import { Perfume } from '../../../shared/types/types';
+import { supabase } from '@/shared/lib/supabase';
+import { Perfume } from '@/shared/types/types';
 import { formatPerfumeData } from '../lib/formatPerfumeData';
 
 export const fetchAllPerfumes = async (): Promise<Perfume[]> => {

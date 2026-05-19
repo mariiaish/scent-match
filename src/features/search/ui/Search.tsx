@@ -2,16 +2,14 @@ import { useState, useMemo } from 'react';
 import Fuse from 'fuse.js';
 import { Search as SearchIcon, Sparkles } from 'lucide-react';
 import { usePerfumeStore } from '../../../entities/perfume/model/perfumeSlice';
-import { useRecsStore } from '../../recommendations/model/recsSlice';
 import { useUserStore } from '../../../entities/user/model/userSlice';
 import { translations } from '../../../shared/i18n/translations';
 import { Perfume } from '../../../shared/types/types';
 
-// TODO: add ability to create new fragrances into database
+// TODO: add ability to create new fragrances into database??
 export const Search = () => {
   const [query, setQuery] = useState('');
-  const { allPerfumes, addToShelf, myShelf } = usePerfumeStore();
-  const { fetchAIRecs } = useRecsStore();
+  const { allPerfumes, addToShelf } = usePerfumeStore();
   const { lang, user } = useUserStore();
   const t = translations[lang];
 
@@ -27,13 +25,7 @@ export const Search = () => {
   const handleSelect = async (perfume: Perfume) => {
     setQuery('');
     const userId = user?.id;
-    // Сначала добавляем в полку
     await addToShelf(perfume, userId);
-    // Затем обновляем рекомендации с УЖЕ обновлённой полкой
-    // myShelf ещё не содержит добавленный парфюм (zustand асинхронный),
-    // поэтому создаём новую полку вручную
-    const updatedShelf = [...myShelf, perfume];
-    await fetchAIRecs(updatedShelf, lang);
   };
 
   return (
