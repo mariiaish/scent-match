@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import Fuse from 'fuse.js';
 import { Search as SearchIcon, Sparkles } from 'lucide-react';
 import { usePerfumeStore } from '../../../entities/perfume/model/perfumeSlice';
-import { useRecsStore } from '../../recommendations/model/recsSlice';
 import { useUserStore } from '../../../entities/user/model/userSlice';
 import { translations } from '../../../shared/i18n/translations';
 import { Perfume } from '../../../shared/types/types';
@@ -10,8 +9,7 @@ import { Perfume } from '../../../shared/types/types';
 // TODO: add ability to create new fragrances into database??
 export const Search = () => {
   const [query, setQuery] = useState('');
-  const { allPerfumes, addToShelf, myShelf } = usePerfumeStore();
-  const { fetchAIRecs } = useRecsStore();
+  const { allPerfumes, addToShelf } = usePerfumeStore();
   const { lang, user } = useUserStore();
   const t = translations[lang];
 
@@ -28,8 +26,6 @@ export const Search = () => {
     setQuery('');
     const userId = user?.id;
     await addToShelf(perfume, userId);
-    const updatedShelf = [...myShelf, perfume];
-    await fetchAIRecs(updatedShelf, lang);
   };
 
   return (

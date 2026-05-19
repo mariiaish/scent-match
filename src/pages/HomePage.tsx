@@ -75,10 +75,8 @@ export const HomePage = () => {
       <main className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-12 lg:grid-cols-12">
         <aside className="space-y-10 lg:col-span-4">
           <div className="space-y-4">
-            <h2 className="text-xl font-medium">{t.searchPlaceholder}</h2>
             <Search />
           </div>
-          {/* {!user && <AuthForm />} */}
           <UserShelf />
         </aside>
 

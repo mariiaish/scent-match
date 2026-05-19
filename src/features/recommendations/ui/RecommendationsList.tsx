@@ -1,17 +1,24 @@
+import React from 'react';
+
 import { usePerfumeStore } from '@/entities/perfume/model/perfumeSlice';
 import { PerfumeCard } from '@/entities/perfume/ui/PerfumeCard';
+
+import { useRecsStore } from '../model/recsSlice';
+
 import { useUserStore } from '@/entities/user/model/userSlice';
 import { translations } from '@/shared/i18n/translations';
-import React from 'react';
-import { useRecsStore } from '../model/recsSlice';
+
 import { Button } from '@/shared/ui/elements/button';
 
 export const RecommendationsList = () => {
   const { myShelf } = usePerfumeStore();
-  const { recommendations, fetchAIRecs } = useRecsStore();
+
+  const { recommendations, fetchAIRecs, isLoading } = useRecsStore();
+
   const { lang } = useUserStore();
 
   const [isReady, setIsReady] = React.useState(false);
+
   const t = translations[lang];
 
   React.useEffect(() => {
@@ -33,8 +40,10 @@ export const RecommendationsList = () => {
 
         {!!myShelf.length && (
           <Button
+            variant="primary"
             onClick={getRecsByShelf}
-            className="bg-perfume-gold hover:bg-perfume-dark-gold mt-4 max-w-max rounded px-4 py-2 text-lg font-semibold text-white shadow transition-colors hover:cursor-pointer"
+            disabled={isLoading}
+            className="mt-4 max-w-max"
           >
             {t.getRecsByShelf}
           </Button>
@@ -48,8 +57,18 @@ export const RecommendationsList = () => {
           ))}
         </div>
       ) : (
-        <div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed text-gray-400">
-          {t.emptyRecs}
+        <div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-300 px-6 text-center text-gray-400">
+          {isLoading ? (
+            <>
+              <p className="text-perfume-gold mb-3 text-lg font-medium">{t.loadingRecs}</p>
+
+              <p className="max-w-md text-sm leading-relaxed text-gray-400">
+                {t.loadingRecsDescription}
+              </p>
+            </>
+          ) : (
+            t.emptyRecs
+          )}
         </div>
       )}
     </div>

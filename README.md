@@ -1,16 +1,49 @@
-# React + Vite
+# Scent Match ✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AI-powered fragrance recommendation service based on a user's perfume collection.
 
-Currently, two official plugins are available:
+Users can search fragrances, build a personal shelf, and receive personalized perfume recommendations generated with LLMs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Demo
 
-## React Compiler
+Live demo: https://scent-match-three.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Authentication
+- Fragrance search with fuzzy matching
+- Personal fragrance shelf
+- AI-generated recommendations
+- Persistent user data with Supabase
+- Responsive UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- Zustand
+
+### Backend / Services
+
+- Vercel Serverless Functions
+- OpenRouter API
+- Supabase
+
+## Architecture
+
+The project uses:
+
+- feature-oriented structure inspired by FSD
+- shared UI primitives with shadcn/ui
+- serverless API routes for secure LLM requests
+
+## Local Development
+
+```bash
+npm install
+npx vercel dev
+```
